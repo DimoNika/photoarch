@@ -1,4 +1,6 @@
 /djvenv
 /photoarch/photoarch/__pycache__
-/photoarch/photocore/__pycache__
+
 /photoarch/photocore/migrations/__pycache__
+
+/__pycache__

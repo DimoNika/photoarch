@@ -7,3 +7,7 @@ from django.http import HttpResponse
 def index(request):
     # return HttpResponse("This is main page")
     return render(request=request, template_name=("photocore/index.html"))
+
+def login(request):
+    # return HttpResponse("This is main page")
+    return render(request=request, template_name=("photocore/login.html"))
