@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'photocore.apps.PhotocoreConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

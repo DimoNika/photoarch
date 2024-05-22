@@ -20,5 +20,6 @@ from photocore import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("photocore.urls"))
+    path("", include("photocore.urls")),
+    path("", include("users.urls", namespace="users"))
 ]
