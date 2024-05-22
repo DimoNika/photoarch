@@ -1,3 +1,5 @@
 
 Start test server
+cd C:\django_photo_proj\photoarch
+
 python manage.py runserver
