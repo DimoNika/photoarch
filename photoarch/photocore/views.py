@@ -8,3 +8,5 @@ def index(request):
     # return HttpResponse("This is main page")
     return render(request=request, template_name=("photocore/index.html"))
 
+def storage_view(request):
+    return render(request=request, template_name=("photocore/storage.html"))
