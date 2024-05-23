@@ -9,4 +9,16 @@ def index(request):
     return render(request=request, template_name=("photocore/index.html"))
 
 def storage_view(request):
-    return render(request=request, template_name=("photocore/storage.html"))
+    
+
+    if request.user.is_authenticated:
+        userstatus = "Logged in"
+    else:
+        userstatus = "unlogged"
+
+    data = {
+        "userstatus": userstatus,
+        "request": request,
+        "username": request.user.username,
+    }
+    return render(request, "photocore/storage.html", data)
