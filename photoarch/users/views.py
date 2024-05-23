@@ -22,11 +22,18 @@ def login_view(request):
                 login(request, user)    
                 return HttpResponseRedirect(reverse("storage"))
             else:
-                return render(request, "users/login.html", {"form": form})
+                data = {
+                    "form": form,
+                    "test": " | Login",
+                }
+                return render(request, "users/login.html", data)
     else:
         form = LoginUserForm()
-    
-    return render(request, "users/login.html", {"form": form})
+    data = {
+        "form": form,
+        "test": " | Login",
+    }
+    return render(request, "users/login.html", data)
 
 
 
@@ -45,6 +52,11 @@ def registre_view(request):
            
     else:
         form = MyRegistreForm()
-        # form = form.
-    # print(form.media)
-    return render(request, "users/registre.html", {"form": form})
+        
+
+        
+    data = {
+        "form": form,
+        "test": " | Registration",
+    }
+    return render(request, "users/registre.html", data)

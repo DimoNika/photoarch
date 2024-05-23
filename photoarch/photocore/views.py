@@ -6,7 +6,10 @@ from django.http import HttpResponse
 
 def index(request):
     # return HttpResponse("This is main page")
-    return render(request=request, template_name=("photocore/index.html"))
+    data = {
+        
+    }
+    return render(request, "photocore/index.html", data)
 
 def storage_view(request):
     
@@ -20,5 +23,6 @@ def storage_view(request):
         "userstatus": userstatus,
         "request": request,
         "username": request.user.username,
+        "test": " | Storage",
     }
     return render(request, "photocore/storage.html", data)
