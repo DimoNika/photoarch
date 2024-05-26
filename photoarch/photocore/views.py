@@ -6,21 +6,22 @@ from django.http import HttpResponse
 
 def index(request):
     # return HttpResponse("This is main page")
+
+
+
+
     data = {
-        
+        "is_logged": request.user.is_authenticated,
+
+        "username": request.user.username,
     }
     return render(request, "photocore/index.html", data)
 
 def storage_view(request):
-    
 
-    if request.user.is_authenticated:
-        userstatus = "Logged in"
-    else:
-        userstatus = "unlogged"
 
     data = {
-        "userstatus": userstatus,
+        "is_logged": request.user.is_authenticated,
         "request": request,
         "username": request.user.username,
         "test": " | Storage",

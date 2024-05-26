@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .forms import LoginUserForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -11,6 +11,13 @@ from .forms import MyRegistreForm
 def login_view(request):
     # return HttpResponse("This is main page")
     # return HttpResponse("hello world")
+    if request.user.is_authenticated:  # If user alredy refistered redirect to storage
+        return HttpResponseRedirect(reverse("storage"))
+    else:
+        pass
+
+
+
     if request.method == "POST":
         form = LoginUserForm(request.POST)
         if form.is_valid():
@@ -40,6 +47,11 @@ def login_view(request):
 
 def registre_view(request):
     
+    if request.user.is_authenticated:  # If user alredy refistered redirect to storage
+        return HttpResponseRedirect(reverse("storage"))
+    else:
+        pass
+
     if request.method == "POST":
         form = MyRegistreForm(request.POST)
         
@@ -60,3 +72,9 @@ def registre_view(request):
         "test": " | Registration",
     }
     return render(request, "users/registre.html", data)
+
+
+def logout_view(request):
+    
+    logout(request)
+    return HttpResponseRedirect(reverse("home"))
