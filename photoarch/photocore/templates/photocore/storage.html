@@ -1,19 +1,66 @@
 {% extends 'base.html' %}
-
+{% load photo_tags %}
 {% block content %}
 
 
 
-    <h1>This is STORAGE page</h1>
-    <p>
-        {{ request }}
-    </p>
-    <p>
-        {{ userstatus }}
-    <br>
-        {{ username }}
-    </p>
 
+    <div class="row">
+        <!-- LEFT COLUMN START -->
+        <div class="col-md-2 debug">
+            
+            <form action="" method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                {{ form.as_p }}
+                <!-- accept=".jpg,.jpeg,.png,.gif" -->
+                <!-- <input type="file" accept="" multiple="multiple"> -->
+                <button class="btn btn-outline-success ">Submit</button>
+            </form>
+
+        </div>
+
+
+        <!-- CENTRE COLUMN START -->
+        <div class="col-md-8 debug">
+            
+            <div class="row">
+                <div class="col-6 debug">
+                    {% for i in files %}
+                        {% if forloop.counter0|divisibleby:2 %}
+                            <img src="{{ i.file.url }}" class="img-fluid" alt="Photo">
+
+                        {% endif %}
+                    {% endfor %}
+                </div>
+        
+                <div class="col-6 debug">
+                    {% for i in files %}
+                        {% if not forloop.counter0|divisibleby:2 %}
+                            <img src="{{ i.file.url }}" class="img-fluid" alt="Photo">
+
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            
+        </div>
+
+
+        
+        <!-- RIGHT COLUMN START -->
+        <div class="col-md-2 debug">
+            <span>hello</span>
+        </div>
+    </div>
+
+    <!-- <div>
+        {% for i in photos %}
+
+        
+        <img src="{{ i.file.url }}" alt="">
+        {% endfor %}
+    </div> -->
+    
 
 
 {% endblock  %}
