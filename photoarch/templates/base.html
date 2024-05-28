@@ -59,8 +59,8 @@
 			
 			{% else %}
 
-				<a href="{% url 'users:login' %}" class="btn btn-outline-dark">Login</a>
-
+				<a href="{% url 'users:login' %}" class="btn ">Log in</a>
+        <a href="{% url 'users:registre' %}" class="btn btn-outline-dark">Sign up</a>
 			{% endif %}
             
 
@@ -88,7 +88,8 @@
         <ul class="nav justify-content-center border-bottom pb-3 mb-3 border-dark-subtle">
           <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-          <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link px-2 text-body-secondary">Login</a></li>
+          <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link px-2 text-body-secondary">Log in</a></li>
+          <li class="nav-item"><a href="{% url 'users:registre' %}" class="nav-link px-2 text-body-secondary">Sign up</a></li>
         </ul>
         <p class="text-center text-body-secondary mb-1">&copy; 2024 DimoNika, Inc</p>
       </footer>

@@ -3,8 +3,8 @@
 {% block content %}
 
 
-    <div style="margin-top: 10vh; margin-bottom: 10vh;">
-        <div class="card mx-auto" style="width: 27rem;">
+    <div style="margin-top: 10vh; margin-bottom: 10vh; padding: 10px;">
+        <div class="card mx-auto" style="max-width: 400px;">
             <div class="card-body">
             <h3 class="card-title mb-4">Registration</h3>
 
@@ -52,7 +52,7 @@
                 
                 
                 
-                <span class="mb-4" style="display: block;">Already have account? <a href="{% url 'users:login' %}">Login</a> here!</span>
+                <span class="mb-4" style="display: block;">Already have account? <a href="{% url 'users:login' %}">Log in</a> here!</span>
                 
                 <button class="btn btn-outline-success float-end">Registre</button>
             </form>
