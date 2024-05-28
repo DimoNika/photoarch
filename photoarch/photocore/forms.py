@@ -10,4 +10,7 @@ class UploadFilesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UploadFilesForm, self).__init__(*args, **kwargs)
         self.fields['file'].widget.attrs.update({'accept':'.jpg,.jpeg,.png,.gif',
-                                                    'multiple': 'multiple'})
+                                                    'multiple': 'multiple',
+                                                    'class':'form-control',
+                                                    'type':'file',
+                                                    'id':'filesform'})

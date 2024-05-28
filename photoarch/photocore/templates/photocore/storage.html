@@ -1,22 +1,88 @@
 {% extends 'base.html' %}
 {% load photo_tags %}
+
+{% block my_css %}
+<style>
+    
+    .image-container {
+        width: 100%;
+        aspect-ratio: 1/1;
+        overflow: hidden; /* скрываем все, что выходит за границы контейнера */
+        position: relative; /* создаем новую систему координат для позиционирования */
+    }
+    
+    .image-container img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Bounce To Right */
+.hvr-bounce-to-right {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+  }
+  .hvr-bounce-to-right:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(104, 104, 104);
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 50%;
+    transform-origin: 0 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  .hvr-bounce-to-right:hover, .hvr-bounce-to-right:focus, .hvr-bounce-to-right:active {
+    color: white;
+  }
+  .hvr-bounce-to-right:hover:before, .hvr-bounce-to-right:focus:before, .hvr-bounce-to-right:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+    -webkit-transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+    transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+  }
+
+
+</style>
+
+
+{% endblock %}
+
 {% block content %}
 
 
+    
 
-
-    <div class="row">
+    <div class="row container-fluid m-0 p-0">
         <!-- LEFT COLUMN START -->
+        
         <div class="col-md-2 debug">
-            
-            <form action="" method="post" enctype="multipart/form-data" >
-                {% csrf_token %}
-                {{ form.as_p }}
-                <!-- accept=".jpg,.jpeg,.png,.gif" -->
-                <!-- <input type="file" accept="" multiple="multiple"> -->
-                <button class="btn btn-outline-success ">Submit</button>
-            </form>
+            <div class="btn-group-vertical mt-2" role="group" aria-label="Vertical button group">
+                <button type="button" class="btn hvr-bounce-to-right" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <h4 class="p-1 m-0">
+                        Upload files
+                    </h4>
+                </button>
 
+              </div>
         </div>
 
 
@@ -24,43 +90,197 @@
         <div class="col-md-8 debug">
             
             <div class="row">
-                <div class="col-6 debug">
-                    {% for i in files %}
-                        {% if forloop.counter0|divisibleby:2 %}
-                            <img src="{{ i.file.url }}" class="img-fluid" alt="Photo">
-
-                        {% endif %}
-                    {% endfor %}
+                <div class="col-3 debug">
+                    {% with total=files|split_into_four %}
+                        <!-- {{ total }} employee{{ total|pluralize }} -->
+                        {% for i in total.0 %}
+                            
+                            
+                                <div class="image-container">
+                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo">
+                                </div>
+                                
+                        
+                        {% endfor %}
+                    {% endwith %}
+                    </div>
+                <div class="col-3 debug">
+                    {% with total=files|split_into_four %}
+                        <!-- {{ total }} employee{{ total|pluralize }} -->
+                        {% for i in total.1 %}
+                            
+                            
+                                <div class="image-container">
+                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo">
+                                </div>
+                                
+                        
+                        {% endfor %}
+                    {% endwith %}
                 </div>
-        
-                <div class="col-6 debug">
-                    {% for i in files %}
-                        {% if not forloop.counter0|divisibleby:2 %}
-                            <img src="{{ i.file.url }}" class="img-fluid" alt="Photo">
-
-                        {% endif %}
-                    {% endfor %}
+                <div class="col-3 debug">
+                    {% with total=files|split_into_four %}
+                        <!-- {{ total }} employee{{ total|pluralize }} -->
+                        {% for i in total.2 %}
+                            
+                            
+                                <div class="image-container">
+                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo">
+                                </div>
+                                
+                        
+                        {% endfor %}
+                    {% endwith %}
+                </div>
+                <div class="col-3 debug">
+                    {% with total=files|split_into_four %}
+                        <!-- {{ total }} employee{{ total|pluralize }} -->
+                        {% for i in total.3 %}
+                            
+                            
+                                <div class="image-container">
+                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo">
+                                </div>
+                                
+                        
+                        {% endfor %}
+                    {% endwith %}
                 </div>
             </div>
             
         </div>
 
 
-        
         <!-- RIGHT COLUMN START -->
         <div class="col-md-2 debug">
-            <span>hello</span>
+
+            
+            
         </div>
     </div>
 
-    <!-- <div>
-        {% for i in photos %}
 
-        
-        <img src="{{ i.file.url }}" alt="">
-        {% endfor %}
-    </div> -->
+    <!-- <input class="form-control" type="file" id="username" multiple> -->
+
     
+    <!-- MODAL -->
+    <div class="modal " id="myModal">
+        <div class="modal-dialog modal-xl ">
+            <div class="modal-content">
+                
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h3 class="modal-title">Load files</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body" style="min-height: 600px;">
+                <div class="row">
+                    
+                    <div class="col-lg-5 order-lg-2">
+                        <div class="mb-3" >
+                            <!-- <label for="formFileMultiple" class="form-label">Multiple files input example</label> -->
+                            <!-- <input class="form-control" type="file" id="fileform" multiple> -->
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <label for="fileform" class="form-label">Choose file you want to upload:</label>
 
+                                {{ form.file }}
+                                <!-- <button class="btn btn-outline-success float-end">Login</button> -->
+                                <div class="container-fluid m-3">
+                                    <button class="btn btn-info float-end">Upload</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-7 order-lg-1">
+                        <h4>
+                            Here will appear selected files: 
 
+                            <button type="button" class="btn float-end"
+                            data-bs-toggle="tooltip" data-bs-placement="top"
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title="If you see red files that means form will not be submited!">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-info-circle float-end" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                            </svg>
+                            </button>
+                        </h4>
+                        
+                        
+                        <p id="filelist">
+
+                        </p>
+
+                        
+                    </div>
+                    
+                
+                </div>
+               
+            </div>
+      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+      
+          </div>
+        </div>
+      </div>
 {% endblock  %}
+
+{% block my_js %}
+
+      <script>
+        
+        
+        document.addEventListener('DOMContentLoaded', (event) => {
+            console.log("hello")
+            
+            const validMediaExtensions = ['.3gp', '.avi', '.mov', '.m4v', '.m4a', '.mp3', '.mkv', '.ogm', '.ogg', '.oga', '.webm', '.wav'];
+            const validImageExtensions = ['.bmp', '.gif', '.jpg', '.jpeg', '.png', '.webp'];
+            
+            const fileInput = document.getElementById('filesform');
+            console.log(fileInput);
+
+           
+
+            fileInput.addEventListener('change', function(event) {
+                const fileList = document.getElementById('filelist');
+                fileList.innerHTML = ''; // Clear the current list
+    
+                const files = event.target.files;
+                for (let i = 0; i < files.length; i++) {
+                    const file = files[i];
+                    const fileName = file.name;
+                    const fileExtension = fileName.substring(fileName.lastIndexOf('.')).toLowerCase();
+    
+                    if (validMediaExtensions.includes(fileExtension) || validImageExtensions.includes(fileExtension)) {
+                        const li = document.createElement('li');
+                        li.textContent = fileName;
+                        fileList.appendChild(li);
+                    } else {
+                        // Optionally, you can show an error message here
+                        const li = document.createElement('li');
+                        li.classList.add('text-danger')
+                        li.textContent = fileName;
+                        fileList.appendChild(li);
+
+                    }
+                }
+            });          
+        });
+
+        // Initialize tooltips
+        //  https://www.w3schools.com/bootstrap5/bootstrap_tooltip.php
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+{% endblock %}
