@@ -30,6 +30,12 @@
         width: 100%;
         height: 100%;
     }
+    
+    .image-container video {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
 
     /* Bounce To Right */
 .hvr-bounce-to-right {
@@ -88,7 +94,7 @@
     <div class="row container-fluid m-0 p-0">
         <!-- LEFT COLUMN START -->
         
-        <div class="col-md-2 debug">
+        <div class="col-lg-2 debug">
             <div class="btn-group-vertical mt-2" role="group" aria-label="Vertical button group">
                 <button type="button" class="btn hvr-bounce-to-right" data-bs-toggle="modal" data-bs-target="#myModal">
                     <h4 class="p-1 m-0">
@@ -101,59 +107,126 @@
 
 
         <!-- CENTRE COLUMN START -->
-        <div class="col-md-8 debug">
+        <div class="col-lg-8 debug">
             
-            <div class="row">
-                <div class="col-3 debug">
-                    {% with total=files|split_into_four %}
+            <div class="row mb-3">
+                <div class="col-6 col-lg-3 debug">
+                    {% with total=files_with_types|split_into_four %}
                         <!-- {{ total }} employee{{ total|pluralize }} -->
                         {% for i in total.0 %}
-                            
-                            
-                                <div class="image-container">
-                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery">
-                                </div>
+
+                            <div class="image-container">
+                                {% if i.1 == "picture"%}
+                                        
+                                        <img src="{{ i.0.file.url }}" class="" alt="Photo" data-fancybox="gallery">
+                                    
+                                        <!-- <img src="{{ i.0.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery"> -->
+                                    
+                                    {% elif i.1 == "video" %}
+                                    
+                                    <a href="{{ i.0.file.url }}" class="img-fluid my-3" data-fancybox="gallery" controls>
+                                        <video src="{{ i.0.file.url }}" class="img-fluid" controls>
+                                        
+                                        </video>
+                                        
+                                        
+                                    </a>
+                                    {% else %}
+                                        <p class="text-danger">Unknown file format</p>
+                                    {% endif %}
+                            </div>
                                 
                         
                         {% endfor %}
                     {% endwith %}
                     </div>
-                <div class="col-3 debug">
-                    {% with total=files|split_into_four %}
+                <div class="col-6 col-lg-3 debug">
+                    {% with total=files_with_types|split_into_four %}
                         <!-- {{ total }} employee{{ total|pluralize }} -->
                         {% for i in total.1 %}
                             
                             
                                 <div class="image-container">
-                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery">
+                                    {% if i.1 == "picture"%}
+                                        
+                                        <img src="{{ i.0.file.url }}" class="" alt="Photo" data-fancybox="gallery">
+                                    
+                                        <!-- <img src="{{ i.0.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery"> -->
+                                    
+                                    {% elif i.1 == "video" %}
+                                    
+                                    <a href="{{ i.0.file.url }}" class="img-fluid my-3" data-fancybox="gallery" controls>
+                                        <video src="{{ i.0.file.url }}" class="img-fluid" controls>
+                                        
+                                        </video>
+                                        
+                                        
+                                    </a>
+                                    {% else %}
+                                        <p class="text-danger">Unknown file format</p>
+                                    {% endif %}
                                 </div>
                                 
                         
                         {% endfor %}
                     {% endwith %}
                 </div>
-                <div class="col-3 debug">
-                    {% with total=files|split_into_four %}
+                <div class="col-6 col-lg-3 debug">
+                    {% with total=files_with_types|split_into_four %}
                         <!-- {{ total }} employee{{ total|pluralize }} -->
                         {% for i in total.2 %}
                             
                             
                                 <div class="image-container">
-                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery">
+                                    {% if i.1 == "picture"%}
+                                        
+                                        <img src="{{ i.0.file.url }}" class="" alt="Photo" data-fancybox="gallery">
+                                    
+                                        <!-- <img src="{{ i.0.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery"> -->
+                                    
+                                    {% elif i.1 == "video" %}
+                                    
+                                    <a href="{{ i.0.file.url }}" class="img-fluid my-3" data-fancybox="gallery" controls>
+                                        <video src="{{ i.0.file.url }}" class="img-fluid" controls>
+                                        
+                                        </video>
+                                        
+                                        
+                                    </a>
+                                    {% else %}
+                                        <p class="text-danger">Unknown file format</p>
+                                    {% endif %}
                                 </div>
                                 
                         
                         {% endfor %}
                     {% endwith %}
                 </div>
-                <div class="col-3 debug">
-                    {% with total=files|split_into_four %}
+                <div class="col-6 col-lg-3 debug">
+                    {% with total=files_with_types|split_into_four %}
                         <!-- {{ total }} employee{{ total|pluralize }} -->
                         {% for i in total.3 %}
                             
                             
                                 <div class="image-container">
-                                    <img src="{{ i.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery">
+                                    {% if i.1 == "picture"%}
+                                        
+                                        <img src="{{ i.0.file.url }}" class="" alt="Photo" data-fancybox="gallery">
+                                    
+                                        <!-- <img src="{{ i.0.file.url }}" class="img-fluid my-3" alt="Photo" data-fancybox="gallery"> -->
+                                    
+                                    {% elif i.1 == "video" %}
+                                    
+                                    <a href="{{ i.0.file.url }}" class="img-fluid my-3" data-fancybox="gallery" controls>
+                                        <video src="{{ i.0.file.url }}" class="img-fluid" controls>
+                                        
+                                        </video>
+                                        
+                                        
+                                    </a>
+                                    {% else %}
+                                        <p class="text-danger">Unknown file format</p>
+                                    {% endif %}
                                 </div>
                                 
                         
@@ -166,7 +239,7 @@
 
 
         <!-- RIGHT COLUMN START -->
-        <div class="col-md-2 debug">
+        <div class="col-lg-2 debug">
 
             
             
@@ -263,7 +336,7 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             console.log("hello")
             
-            const validMediaExtensions = ['.3gp', '.avi', '.mov', '.m4v', '.m4a', '.mp3', '.mkv', '.ogm', '.ogg', '.oga', '.webm', '.wav'];
+            const validMediaExtensions = [".mp4", ".webm",  ".ogg"];
             const validImageExtensions = ['.bmp', '.gif', '.jpg', '.jpeg', '.png', '.webp'];
             
             const fileInput = document.getElementById('filesform');
